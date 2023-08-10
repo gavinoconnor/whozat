@@ -38,3 +38,9 @@ button {
   border: 1px solid pink;
   cursor: pointer;
 }
+
+button:hover,
+button:focus {
+  background-color: #252525;
+  color: pink;
+}
