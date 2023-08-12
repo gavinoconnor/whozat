@@ -43,11 +43,11 @@ function handleClick() {
 
 
   const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimalName}&w=400&client_id=myKey`;
+  placeholderText.classList.add('hidden')
 
   fetch(unsplashUrl)
     .then(response => response.json())
     .then(data => {
-      placeholderText.classList.add('hidden')
       animalImg.src = data.urls.small
     })
     .catch(error => {

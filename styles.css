@@ -3,6 +3,16 @@ body {
   margin: 0;
 }
 
+h3 {
+  text-align: center;
+}
+
+#title {
+  font-family: 'Lobster', sans-serif;
+  font-size: 2.5rem;
+  color: #252525;
+}
+
 img {
   width: 100%;
   height: auto;
@@ -15,10 +25,12 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color :whitesmoke;
-  padding: 0 1em 1em 1em;
+  padding: 0 1em 1em 0;
   height: 99vh;
-  /* width: 100%; */
+  background: #C6FFDD;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: 'Comfortaa', sans-serif;
 }
 
 #image-container {
@@ -32,15 +44,19 @@ img {
   position: relative;
 }
 
+#info-container {
+  display: flex;
+}
+
 #placeholder-text {
   position: absolute; /* Position absolutely within the image-container */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Center the text */
   text-align: center;
-  font-size: 18px;
+  font-size: 2rem;
   font-weight: bold;
-  color: #555;
+  color: black;
 }
 
 .hidden {
@@ -48,22 +64,26 @@ img {
 }
 
 .animal-name {
-  color: whitesmoke;
-  text-shadow: 1px 1px 1px black;
+  font-size: 2.75rem;
+  color: #252525;
+  text-shadow: 0 0 1px #252525;
 }
 
 button {
   font-size: 1.125rem;
-  font-weight: 500;
-  padding: 0.5em 1em;
-  border-radius: 4.6px;
-  background-color: pink;
-  border: 1px solid pink;
+  font-weight: 600;
+  padding: 3em 2em;
+  border-radius: 50%;
+  background-color: #f44336;
+  border: 1px solid #f44336;
   cursor: pointer;
+  scale: 0.9;
+  margin-bottom: 60px;
 }
 
 button:hover,
+button:active,
 button:focus {
-  background-color: #252525;
-  color: pink;
+  transform: scale(1.125);
+  transition: all ease 0.3s;
 }
