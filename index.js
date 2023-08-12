@@ -7,7 +7,14 @@ const animalName = document.querySelector('.animal-name')
 
 // Temporary animal array
 // Also need to incorporate sounds
-const animalNames = ['Cat', 'Dog', 'Elephant', 'Tiger', 'Lion'];
+const animalNames = [
+  'Cat', 'Dog', 'Elephant', 'Tiger', 'Lion',
+  'Bear', 'Eagle', 'Crow', 'Wolf', 'Fox', 
+  'Giraffe', 'Bull', 'Cow', 'Pig', 'Chicken', 
+  'Shark', 'Goldfish', 'Dolphin', 'Whale',
+  'Porcupine', 'Squirrel', 'Mouse', 'Bat', 
+  'Coyote', 'Rabbit', 'Chipmunk', 'Raccoon',
+  'Bobcat', 'Lynx', 'Otter']
 
 function getRandomAnimalName() {
   const randomIndex = Math.floor(Math.random() * animalNames.length);
@@ -15,16 +22,15 @@ function getRandomAnimalName() {
 }
 
 function handleClick() {
-   // Remove any existing image
+  // Remove any existing image
   const existingImage = document.querySelector('.animal-img');
+  
   if (existingImage) {
     existingImage.remove();
   }
-
+  
   const randomAnimalName = getRandomAnimalName();
-
   animalName.textContent = randomAnimalName;
-
 
   // Create an img element
   const animalImg = document.createElement('img');
@@ -36,7 +42,7 @@ function handleClick() {
   imageContainer.appendChild(animalImg);
 
 
-  const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimalName}&w=400&client_id={myKey}`;
+  const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimalName}&w=400&client_id=myKey`;
 
   fetch(unsplashUrl)
     .then(response => response.json())
