@@ -36,10 +36,9 @@ function handleClick() {
   const animalImg = document.createElement('img');
   animalImg.className = 'animal-img'; // Set class to apply CSS styling
   animalImg.alt = randomAnimalName; // Set alt attribute to the animal name
-
-
   // Append the img element to the container
   imageContainer.appendChild(animalImg);
+  // TO DO: abstract to a function outside the click handler
 
 
   const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimalName}&w=400&client_id=myKey`;

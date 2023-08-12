@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -11,6 +17,7 @@ h3 {
   font-family: 'Lobster', sans-serif;
   font-size: 2.5rem;
   color: #252525;
+  margin-bottom: 0;
 }
 
 img {
@@ -25,8 +32,8 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 0 1em 1em 0;
-  height: 99vh;
+  padding: 0;
+  height: 100vh;
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -40,19 +47,14 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  position: relative;
 }
 
 #info-container {
   display: flex;
+  margin: 0 auto;
 }
 
 #placeholder-text {
-  position: absolute; /* Position absolutely within the image-container */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the text */
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
@@ -78,7 +80,7 @@ button {
   border: 1px solid #f44336;
   cursor: pointer;
   scale: 0.9;
-  margin-bottom: 60px;
+  margin-bottom: 10px;
 }
 
 button:hover,
