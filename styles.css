@@ -5,7 +5,9 @@ body {
 
 img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  object-fit: cover;
+  /* transition: all 0.5s ease; */
 }
 
 .container {
@@ -13,15 +15,36 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color :bisque;
+  background-color :whitesmoke;
   padding: 0 1em 1em 1em;
-  height: 100vh;
+  height: 99vh;
+  /* width: 100%; */
 }
 
 #image-container {
-  max-width: 300px;
-  background-color: lightblue;
-  border: 2px solid green;
+  width: 400px;
+  height: 400px;
+  background-color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+#placeholder-text {
+  position: absolute; /* Position absolutely within the image-container */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the text */
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+.hidden {
+  display: none;
 }
 
 .animal-name {

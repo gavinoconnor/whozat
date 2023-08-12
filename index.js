@@ -1,38 +1,56 @@
-const btn = document.getElementById('btn');
-const animalImg = document.querySelector('.animal-img')
+const btn = document.getElementById('btn')
+const imageContainer = document.getElementById('image-container')
+const placeholderText = document.getElementById('placeholder-text')
 const animalName = document.querySelector('.animal-name')
+
 // const animalSound = document.querySelector('.animal-sound')
 
+// Temporary animal array
+// Also need to incorporate sounds
+const animalNames = ['Cat', 'Dog', 'Elephant', 'Tiger', 'Lion'];
+
+function getRandomAnimalName() {
+  const randomIndex = Math.floor(Math.random() * animalNames.length);
+  return animalNames[randomIndex];
+}
 
 function handleClick() {
-  // Temporary animal array
-  // Also need to incorporate sounds
-  const animals = [
-    { name: 'cat'},
-    { name: 'dog'},
-    { name: 'badger'},
-    { name: 'wolf'},
-    { name: 'fox'},
-    { name: 'eagle'},
-    { name: 'bear'},
-    { name: 'lion'},
-    { name: 'giraffe'}
-  ]
+   // Remove any existing image
+  const existingImage = document.querySelector('.animal-img');
+  if (existingImage) {
+    existingImage.remove();
+  }
 
-  const randomAnimal = animals[Math.floor(Math.random() * animals.length)]
+  const randomAnimalName = getRandomAnimalName();
 
-  const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimal.name}&client_id={myKey}`;
+  animalName.textContent = randomAnimalName;
+
+
+  // Create an img element
+  const animalImg = document.createElement('img');
+  animalImg.className = 'animal-img'; // Set class to apply CSS styling
+  animalImg.alt = randomAnimalName; // Set alt attribute to the animal name
+
+
+  // Append the img element to the container
+  imageContainer.appendChild(animalImg);
+
+
+  const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimalName}&w=400&client_id={myKey}`;
 
   fetch(unsplashUrl)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      placeholderText.classList.add('hidden')
       animalImg.src = data.urls.small
-      animalName.textContent = randomAnimal.name; // Update name
-      // animalSound.src = randomAnimal.sound; // Update sound
-      // animalSound.play(); // Play sound
     })
-    .catch(error => console.error('Error fetching image', error))
+    .catch(error => {
+      // Handle errors
+      console.error('Error fetching image', error)
+      // Remove the img element and show the placeholder text again
+      animalImg.remove();
+      placeholderText.classList.remove('hidden');
+    })
 
 }
 
