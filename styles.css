@@ -4,25 +4,21 @@
   box-sizing: border-box;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-}
-
 h3 {
   text-align: center;
 }
 
 #title {
   font-family: 'Lobster', sans-serif;
-  font-size: 2.5rem;
-  color: #252525;
+  font-size: 3rem;
+  color: #C6FFDD;
+  text-shadow: 0 0 1px #252525;
   margin-bottom: 0;
 }
 
 img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   /* transition: all 0.5s ease; */
 }
@@ -58,7 +54,8 @@ img {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
-  color: black;
+  color: #C6FFDD;
+  text-shadow: 0 0 4px #252525;
 }
 
 .hidden {
@@ -66,26 +63,30 @@ img {
 }
 
 .animal-name {
-  font-size: 2.75rem;
-  color: #252525;
-  text-shadow: 0 0 1px #252525;
+  font-size: 3rem;
+  color: #f7797d;
+  text-shadow: 0 0 3px #252525;
+  padding-bottom: 1em;
 }
 
 button {
+  font-family: inherit;
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 3em 2em;
   border-radius: 50%;
-  background-color: #f44336;
-  border: 1px solid #f44336;
+  background-color: #f7797d;
+  border: 2px solid #252525;
+  text-shadow: 0 0 2px #252525;
+  color: #252525;
   cursor: pointer;
   scale: 0.9;
-  margin-bottom: 10px;
+  margin-bottom: .75em;
+  transition: all .2s ease-in-out 0s;
 }
 
 button:hover,
 button:active,
 button:focus {
   transform: scale(1.125);
-  transition: all ease 0.3s;
 }
