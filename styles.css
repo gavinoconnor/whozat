@@ -23,7 +23,7 @@ img {
   /* transition: all 0.5s ease; */
 }
 
-.container {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
