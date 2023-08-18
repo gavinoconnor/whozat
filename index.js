@@ -41,17 +41,22 @@ function handleClick() {
   animalImg.alt = randomAnimalName; // Set alt attribute to the animal name  
   // TO DO: abstract to a function outside the click handler
 
-  const unsplashUrl = `https://api.unsplash.com/photos/random?query=${randomAnimalName}&w=400&client_id=myKey`;
+  const unsplashUrl = `https://api.unsplash.com/photos/random?client_id=myKey&collections=animals&query=${randomAnimalName}&w=400`;
   placeholderText.classList.add('hidden')
 
   fetch(unsplashUrl)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw Error("Something went wrong.")
+      }
+      return response.json()
+    })
     .then(data => {
       animalImg.src = data.urls.small
       imageContainer.appendChild(animalImg) // append to DOM after src is set
     })
     .catch(error => {
-      console.error('Error fetching image', error)
+      console.error(error)
       // Remove the img element and show the placeholder text again
       animalImg.remove();
       placeholderText.classList.remove('hidden');
