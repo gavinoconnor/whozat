@@ -60,10 +60,6 @@ main {
   text-shadow: 0 0 4px #252525;
 }
 
-.hidden {
-  display: none;
-}
-
 .animal-name {
   font-size: 3rem;
   color: #f7797d;
@@ -90,4 +86,8 @@ button:hover,
 button:active,
 button:focus {
   transform: scale(1.125);
+}
+
+.hidden {
+  display: none;
 }
