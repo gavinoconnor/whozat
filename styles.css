@@ -7,6 +7,7 @@
 
 h3 {
   text-align: center;
+  padding: 0;
 }
 
 #title {
@@ -67,7 +68,7 @@ main {
   font-size: 3rem;
   color: #f7797d;
   text-shadow: 0 0 3px #252525;
-  padding-bottom: 1em;
+  padding-bottom: .5em;
 }
 
 button {
@@ -81,7 +82,7 @@ button {
   color: #252525;
   cursor: pointer;
   scale: 0.9;
-  margin-bottom: .75em;
+  margin-bottom: 1.5em;
   transition: all .2s ease-in-out 0s;
 }
 
