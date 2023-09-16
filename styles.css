@@ -72,14 +72,7 @@ button {
   color: #252525;
   box-shadow: 0 -4px 16px rgba(247, 121, 125, 1);
   cursor: pointer;
-  scale: 1;
-  transition: all .2s ease-in-out 0s;
-}
-
-button:hover,
-button:active,
-button:focus {
-  transform: scale(1.125);
+  transition: all .1s ease-in-out 0s;
 }
 
 button:disabled {
