@@ -70,7 +70,7 @@ button {
   background-color: #f7797d;
   border: 2px solid #252525;
   color: #252525;
-  box-shadow: 0 0 20px rgba(247, 121, 125, 1);
+  box-shadow: 0 -4px 16px rgba(247, 121, 125, 1);
   cursor: pointer;
   scale: 1;
   transition: all .2s ease-in-out 0s;
