@@ -1,6 +1,5 @@
 const animals = [
   "alicorn",
-  // "badger-honey", 
   "bat",
   "bee",
   "bird",
