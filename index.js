@@ -8,10 +8,12 @@ const placeholderText = document.getElementById('placeholder-text')
 const ICON_PREFIX = 'fa-'
 
 function handleClick() {
+  btn.disabled = true
+
   let randomIcon = icons[Math.floor(Math.random() * icons.length)]
   
   // Convert class list to an array, find fa-animalName
-  const currentIconName = iconEl.classList.value.split(' ').find(cls => {
+  const currentIconName = Array.from(iconEl.classList).find(cls => {
     return cls.startsWith(ICON_PREFIX) && 
            cls !== 'fa-light' && 
            !cls.includes('x')
@@ -26,6 +28,11 @@ function handleClick() {
   iconEl.classList.remove('hidden')
   iconEl.classList.add(`${ICON_PREFIX}${randomIcon}`)
   animalNameEl.textContent = randomIcon.toUpperCase()
+
+  // Enable button after 1 second
+  setTimeout(() => {
+    btn.disabled = false
+  }, 2000)
 }
 
 btn.addEventListener('click', handleClick)

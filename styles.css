@@ -70,8 +70,9 @@ button {
   background-color: #f7797d;
   border: 2px solid #252525;
   color: #252525;
+  box-shadow: 0 0 20px rgba(247, 121, 125, 1);
   cursor: pointer;
-  scale: 0.9;
+  scale: 1;
   transition: all .2s ease-in-out 0s;
 }
 
@@ -79,6 +80,12 @@ button:hover,
 button:active,
 button:focus {
   transform: scale(1.125);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
 }
 
 .hidden {
