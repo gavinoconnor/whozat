@@ -72,7 +72,6 @@ button {
   color: #252525;
   cursor: pointer;
   scale: 0.9;
-  margin-bottom: 1.5em;
   transition: all .2s ease-in-out 0s;
 }
 
