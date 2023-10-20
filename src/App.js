@@ -3,9 +3,11 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h2>WHOZAT!?</h2>
-      {/* Title component */}
-      {/* Game component */}
+      <main>
+        <h2>WHOZAT!?</h2>
+        {/* Title component */}
+        {/* Game component */}
+      </main>
     </div>
   );
 }
