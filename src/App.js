@@ -1,13 +1,25 @@
-import './App.css';
+import './App.css'
+import AnimalTile from './AnimalTile'
 
 function App() {
   return (
     <div className="App">
-      <main>
-        <h2>WHOZAT!?</h2>
-        {/* Title component */}
+      {/* Title component */}
+      <h2>WHOZAT!?</h2>
+
+      <div className="wrapper">
         {/* Game component */}
-      </main>
+        <div className="tile-container">
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+        </div>
+      </div>
+      {/* end wrapper */}
     </div>
   );
 }
