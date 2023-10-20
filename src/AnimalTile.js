@@ -2,6 +2,8 @@
 
  export default function AnimalTile(props) {
   return (
-    <div className="AnimalTile">{props.value}</div>
+    <div className="animal-tile">
+      <h2>{props.value}</h2>
+    </div>
   )
 }

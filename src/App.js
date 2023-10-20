@@ -17,6 +17,11 @@ function App() {
           <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/>
         </div>
       </div>
       {/* end wrapper */}
