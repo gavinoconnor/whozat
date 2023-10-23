@@ -1,5 +1,8 @@
 import './App.css'
-import AnimalTile from './AnimalTile'
+// import AnimalTile from './AnimalTile'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 
 function App() {
   return (
@@ -10,6 +13,8 @@ function App() {
       <div className="wrapper">
         {/* Game component */}
         <div className="tile-container">
+        <FontAwesomeIcon />
+          {/* <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
@@ -20,8 +25,7 @@ function App() {
           <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
           <AnimalTile value="🤗"/>
-          <AnimalTile value="🤗"/>
-          <AnimalTile value="🤗"/>
+          <AnimalTile value="🤗"/> */}
         </div>
       </div>
       {/* end wrapper */}
