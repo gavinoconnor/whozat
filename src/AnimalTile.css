@@ -2,8 +2,8 @@
   cursor: pointer;
   height: 100px;
   width: 100px;
-  box-shadow: 0px 2px 2px hsla(0, 0%, 0%, 0.15);
-  border-radius: 4px;
+  box-shadow: 2px 2px 4px hsla(73, 49%, 70%, 0.5);
+  border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
