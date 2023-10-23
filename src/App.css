@@ -6,14 +6,16 @@
   min-height: 100vh;
   background-color: hsl(73, 49%, 70%);
   color: hsl(0, 0%, 15%);
-  padding: 2.5rem;
+  margin-top: -20px;
 }
 
 .wrapper {
-  background-color: hsla(0, 0%, 96%, 0.5);
-  height: 400px;
+  background-color: hsla(0, 0%, 96%, 0.35);
+  height: 600px;
+  width: 390px;
   width: 100%;
   max-width: 800px;
+  margin: 0 auto;
   border-radius: 4px;
   padding: 1em;
   display: flex;
