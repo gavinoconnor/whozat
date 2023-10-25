@@ -7,5 +7,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsl(0, 0%, 96%);
+  background-color: hsla(0, 0%, 96%, 0.5);
 }
