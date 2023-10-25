@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import AnimalTile from './AnimalTile'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 

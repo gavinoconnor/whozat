@@ -4,19 +4,14 @@ import {
   faAlicorn, 
   faBat, faBee, faBird, faBugs,
   faCat, faCrab, faCow, faCrow, 
-  faDeer, faDinosaur, faDog, faDolphin, faDove, faDragon, faDuck, 
-  faElephant,
-  faFish, faFrog,
-  faHippo, faHorse, faLobster, faLocust,
-  faMonkey, faMosquito,
-  faNarwhal,
-  faOtter,
-  faPegasus, faPig,
+  faDeer, faDinosaur, faDog, faDolphin, 
+  faDove, faDragon, faDuck, faElephant,
+  faFish, faFrog, faHippo, faHorse, 
+  faLobster, faLocust, faMonkey, faMosquito,
+  faNarwhal,faOtter, faPegasus, faPig,
   faRabbit, faRaccoon, faRam,
   faSheep, faShrimp, faSnake,
-  faTurtle,
-  faUnicorn,
-  faWhale, faWorm 
+  faTurtle, faUnicorn, faWhale, faWorm 
  } from '@fortawesome/pro-light-svg-icons'
 
  // name to icon mapping
