@@ -10,7 +10,7 @@ import {
   faLobster, faLocust, faMonkey, faMosquito,
   faNarwhal,faOtter, faPegasus, faPig,
   faRabbit, faRaccoon, faRam,
-  faSheep, faShrimp, faSnake,
+  faSheep, faShrimp, faSnake, faSpider, faSquid, faSquirrel,
   faTurtle, faUnicorn, faWhale, faWorm 
  } from '@fortawesome/pro-light-svg-icons'
 
@@ -26,15 +26,14 @@ import {
     mosquito: faMosquito, narwhal: faNarwhal, otter: faOtter, 
     pegasus: faPegasus, pig: faPig, rabbit: faRabbit, raccoon: faRaccoon,
     ram: faRam, sheep: faSheep, shrimp: faShrimp, snake: faSnake, 
+    spider: faSpider, squid: faSquid, squirrel: faSquirrel,
     turtle: faTurtle, unicorn: faUnicorn, whale: faWhale, worm: faWorm
  }
 
  export default function AnimalTile(props) {
-
   return (
     <div className="animal-tile" onClick={props.handleClick}>
-      <FontAwesomeIcon icon={animalIcons[props.value]} size="3x"/>
+      <FontAwesomeIcon icon={animalIcons[props.value]} size="3x" />
     </div>
   )
-
 }

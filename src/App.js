@@ -5,7 +5,7 @@ import AnimalTile from './AnimalTile'
 
 
 function App() {
-
+  // confirmed Font Awesome icons 
   const animalNames = [
     "alicorn", "bat", "bee", "bird", "bugs", "cat", "crab", "cow", "crow", "deer", 
     "dinosaur", "dog", "dolphin", "dove", "dragon", "duck", "elephant", "fish", 
