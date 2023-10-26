@@ -68,8 +68,10 @@ function App() {
         <div className="tile-container">
           {renderedTiles}
         </div>
-        <button onClick={getNewAnimals}>New Animals</button>
-        <button onClick={scramble}>Scramble</button>
+        <div className="button-container">
+          <button className="btn" onClick={getNewAnimals}>New Animals</button>
+          <button className="btn" onClick={scramble}>Scramble</button>
+        </div>
       </div>
       {/* end wrapper */}
     </div>
