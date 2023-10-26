@@ -9,7 +9,7 @@ function App() {
 
   const [animalTiles, setAnimalTiles] = useState(() => {
     const selectedAnimals = selectAnimals(baseAnimals)
-    return getTilesforSelectedAnimals(selectedAnimals)
+    return shuffle(getSelectedAnimalTiles(selectedAnimals))
   })
 
   function selectAnimals(allAnimals) {
@@ -17,8 +17,9 @@ function App() {
     return shuffled.slice(0, 4)
   }
 
-  function getTilesforSelectedAnimals(selectedAnimals) {
-    return initialTiles.filter(tile => selectedAnimals.includes(tile.animal))
+  function getSelectedAnimalTiles(selectedAnimals) {
+    return initialTiles.filter(tile => 
+      selectedAnimals.includes(tile.animal))
   }
 
   function shuffle(array) {
@@ -39,9 +40,9 @@ function App() {
     ))
   }
   
-  function getNewAnimals(animalNames) {
+  function getNewAnimals() {
     const selected = selectAnimals(baseAnimals)
-    setAnimalTiles(shuffle(getTilesforSelectedAnimals(selected)))
+    setAnimalTiles(shuffle(getSelectedAnimalTiles(selected)))
   }
 
   function scramble() {
@@ -65,7 +66,7 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={() => getNewAnimals(initialTiles)}>New Animals</button>
+          <button className="btn" onClick={getNewAnimals}>New Animals</button>
           <button className="btn" onClick={scramble}>Scramble</button>
         </div>
       </div>
