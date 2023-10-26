@@ -14,11 +14,19 @@ function App() {
     "spider", "squid", "squirrel", "turtle", "unicorn", "whale", "worm"
   ]
 
-  const [shuffledAnimals, setShuffledAnimals] = useState(() => {
-    const allShuffled = shuffle(animalNames)
-    const selected = allShuffled.slice(0, 4)
-    return [...selected, ...selected, ...selected]
+  const [animalTiles, setAnimalTiles] = useState(() => {
+    const selected = selectAnimals(animalNames)
+    return generateAnimalTiles(selected)
   })
+
+  function selectAnimals(allAnimals) {
+    const shuffled = shuffle(allAnimals)
+    return shuffled.slice(0, 4)
+  }
+
+  function generateAnimalTiles(selectedAnimals) {
+    return [...selectedAnimals, ...selectedAnimals, ...selectedAnimals]
+  }
 
   function shuffle(array) {
     let shuffledArray = [...array]
@@ -32,24 +40,36 @@ function App() {
     return shuffledArray
   }
 
+  function getNewAnimals() {
+    const selected = selectAnimals(animalNames)
+    setAnimalTiles(generateAnimalTiles(selected))
+  }
+
+  function scramble() {
+    setAnimalTiles(prevTiles => shuffle([...prevTiles]))
+  }
+
   function handleClick() {
     console.log("click")
   }
+
+  const renderedTiles = animalTiles.map((animal, index) => (
+    <AnimalTile 
+      key={index} 
+      value={animal} 
+      handleClick={handleClick}   
+    />
+  ))
   
   return (
     <div className="App">
       <h2>WHOZAT!?</h2>
-
       <div className="wrapper">
         <div className="tile-container">
-          {shuffledAnimals.map((animal, index) => (
-            <AnimalTile 
-              key={index} 
-              value={animal} 
-              handleClick={handleClick}
-            />
-          ))}
+          {renderedTiles}
         </div>
+        <button onClick={getNewAnimals}>New Animals</button>
+        <button onClick={scramble}>Scramble</button>
       </div>
       {/* end wrapper */}
     </div>
