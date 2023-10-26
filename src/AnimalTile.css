@@ -9,3 +9,7 @@
   align-items: center;
   background-color: hsla(0, 0%, 96%, 0.5);
 }
+
+.animal-tile.held {
+  background-color: hsl(115, 100%, 75%);
+}

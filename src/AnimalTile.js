@@ -32,8 +32,11 @@ import {
 
  export default function AnimalTile(props) {
   return (
-    <div className="animal-tile" onClick={props.handleClick}>
-      <FontAwesomeIcon icon={animalIcons[props.value]} size="3x" />
+    <div 
+      className={`animal-tile ${props.isHeld ? 'held' : ''}`} 
+      onClick={props.handleClick}
+    >
+      <FontAwesomeIcon icon={animalIcons[props.value]} size="3x"/>
     </div>
   )
 }

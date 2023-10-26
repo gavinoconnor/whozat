@@ -1,22 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 import AnimalTile from './AnimalTile'
+import { baseAnimals, initialTiles } from './data/data'
 
 
 
 function App() {
-  // confirmed Font Awesome icons 
-  const animalNames = [
-    "alicorn", "bat", "bee", "bird", "bugs", "cat", "crab", "cow", "crow", "deer", 
-    "dinosaur", "dog", "dolphin", "dove", "dragon", "duck", "elephant", "fish", 
-    "frog", "hippo", "horse", "lobster", "locust", "monkey", "mosquito", "narwhal", 
-    "otter", "pegasus", "pig", "rabbit", "raccoon", "ram", "sheep", "shrimp", "snake", 
-    "spider", "squid", "squirrel", "turtle", "unicorn", "whale", "worm"
-  ]
 
   const [animalTiles, setAnimalTiles] = useState(() => {
-    const selected = selectAnimals(animalNames)
-    return generateAnimalTiles(selected)
+    const selectedAnimals = selectAnimals(baseAnimals)
+    return getTilesforSelectedAnimals(selectedAnimals)
   })
 
   function selectAnimals(allAnimals) {
@@ -24,8 +17,8 @@ function App() {
     return shuffled.slice(0, 4)
   }
 
-  function generateAnimalTiles(selectedAnimals) {
-    return [...selectedAnimals, ...selectedAnimals, ...selectedAnimals]
+  function getTilesforSelectedAnimals(selectedAnimals) {
+    return initialTiles.filter(tile => selectedAnimals.includes(tile.animal))
   }
 
   function shuffle(array) {
@@ -40,24 +33,27 @@ function App() {
     return shuffledArray
   }
 
-  function getNewAnimals() {
-    const selected = selectAnimals(animalNames)
-    setAnimalTiles(generateAnimalTiles(selected))
+  function handleClick(tileId) {
+    setAnimalTiles(prevTiles => prevTiles.map(tile => 
+      tile.id === tileId ? {...tile, isHeld: !tile.isHeld} : tile
+    ))
+  }
+  
+  function getNewAnimals(animalNames) {
+    const selected = selectAnimals(baseAnimals)
+    setAnimalTiles(shuffle(getTilesforSelectedAnimals(selected)))
   }
 
   function scramble() {
     setAnimalTiles(prevTiles => shuffle([...prevTiles]))
   }
 
-  function handleClick() {
-    console.log("click")
-  }
-
-  const renderedTiles = animalTiles.map((animal, index) => (
+  const renderedTiles = animalTiles.map(tile => (
     <AnimalTile 
-      key={index} 
-      value={animal} 
-      handleClick={handleClick}   
+      key={tile.id} 
+      value={tile.animal}
+      isHeld={tile.isHeld} 
+      handleClick={() => handleClick(tile.id)}   
     />
   ))
   
@@ -69,7 +65,7 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={getNewAnimals}>New Animals</button>
+          <button className="btn" onClick={() => getNewAnimals(initialTiles)}>New Animals</button>
           <button className="btn" onClick={scramble}>Scramble</button>
         </div>
       </div>
