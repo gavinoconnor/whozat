@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import './App.css'
-import AnimalTile from './AnimalTile'
+import { shuffle } from './utils'
 import { baseAnimals, initialTiles } from './data/data'
+import AnimalTile from './AnimalTile'
+import './App.css'
 
 
 
@@ -21,18 +22,6 @@ function App() {
   function getSelectedAnimalTiles(selectedAnimals) {
     return initialTiles.filter(tile => 
       selectedAnimals.includes(tile.animal))
-  }
-
-  function shuffle(array) {
-    let shuffledArray = [...array]
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const randomIndex = Math.floor(Math.random() * (i + 1))
-      // swap elements 
-      let temp = shuffledArray[i]
-      shuffledArray[i] = shuffledArray[randomIndex]
-      shuffledArray[randomIndex] = temp
-    }
-    return shuffledArray
   }
 
   function handleClick(tileId) {
