@@ -31,7 +31,14 @@ function App() {
   }
 
   function clearHeldTiles() {
-    setAnimalTiles(prevTiles => prevTiles.map(tile => ({ ...tile, isHeld: false})))
+    setAnimalTiles(prevTiles => 
+      prevTiles.map(tile => {
+        if (tile.isMatched) {
+          return tile;
+        }
+        return { ...tile, isHeld: false }
+      })
+    )
   }
 
   
@@ -53,7 +60,6 @@ function App() {
 
         for (const animal in groupedTiles) {
           if (groupedTiles[animal].length === 3) {
-            console.log(`Three ${animal}s have been selected!`)
             updatedTiles = updatedTiles.map(tile => {
               if (groupedTiles[animal].some(matchedTile => matchedTile.id === tile.id)) {
                 return { ...tile, isMatched: true }

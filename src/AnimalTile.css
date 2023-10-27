@@ -10,8 +10,8 @@
   background-color: hsla(0, 0%, 96%, 0.5);
 }
 
-.animal-tile.held {
-  background-color: hsl(115, 100%, 75%);
+.animal-tile.matched {
+  pointer-events: none;
 }
 
 .ground { background-color: hsl(115, 50%, 45%); } /* green */

@@ -35,6 +35,9 @@ import {
   if (props.isHeld) {
     tileClass += ` ${props.category}`
   }
+  if (props.isMatched) {
+    tileClass += ` matched`
+  }
   return (
     <div 
       className={tileClass} 
@@ -44,6 +47,7 @@ import {
         icon={animalIcons[props.value]} 
         size="3x" 
         beat={props.isHeld ? true : false}
+        spin={props.isMatched ? true : false}
       />
     </div>
   )
