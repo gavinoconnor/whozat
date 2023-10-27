@@ -36,7 +36,11 @@ import {
       className={`animal-tile ${props.isHeld ? 'held' : ''}`} 
       onClick={props.handleClick}
     >
-      <FontAwesomeIcon icon={animalIcons[props.value]} size="3x"/>
+      <FontAwesomeIcon 
+        icon={animalIcons[props.value]} 
+        size="3x" 
+        beat={props.isHeld ? true : false}
+      />
     </div>
   )
 }

@@ -12,9 +12,10 @@ function App() {
     return shuffle(getSelectedAnimalTiles(selectedAnimals))
   })
 
-  function selectAnimals(allAnimals) {
-    const shuffled = shuffle(allAnimals)
-    return shuffled.slice(0, 4)
+  function selectAnimals(animalArray) {
+    const shuffledAnimals = shuffle(animalArray)
+    // select and shuffle four animals
+    return shuffledAnimals.slice(0, 4)
   }
 
   function getSelectedAnimalTiles(selectedAnimals) {
