@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { shuffle } from './utils'
-import { animalNameArray, initialTiles } from './data/data'
+import { animalsData, generateTiles } from './data/data'
 import AnimalTile from './AnimalTile'
 import './App.css'
 
@@ -8,28 +8,32 @@ import './App.css'
 function App() {
 
   const [animalTiles, setAnimalTiles] = useState(() => {
-    const selectedAnimals = getFourRandomAnimals(animalNameArray)
+    const selectedAnimals = getFourRandomAnimals(animalsData)
     const selectedTiles = getTilesForSelectedAnimals(selectedAnimals)
     return shuffle(selectedTiles)
   })
 
-  function getFourRandomAnimals(animalNames) {
-    return shuffle(animalNames).slice(0, 4)
+  function getFourRandomAnimals(animalData) {
+    return shuffle(animalData).slice(0, 4)
   }
 
   function getTilesForSelectedAnimals(selectedAnimals) {
-    return selectedAnimals.flatMap(animal => 
-      initialTiles.filter(tile => tile.animal === animal))
+    return generateTiles(selectedAnimals)
   }
 
   function getNewAnimalTiles() {
-    const newAnimals = getFourRandomAnimals(animalNameArray)
+    const newAnimals = getFourRandomAnimals(animalsData)
     setAnimalTiles(shuffle(getTilesForSelectedAnimals(newAnimals)))
   }
 
-  function scramble() {
+  function scrambleCurrentTiles() {
     setAnimalTiles(prevTiles => shuffle([...prevTiles]))
   }
+
+  function clearHeldTiles() {
+    setAnimalTiles(prevTiles => prevTiles.map(tile => ({ ...tile, isHeld: false})))
+  }
+
   
   function handleClick(tileId) {
     setAnimalTiles(prevTiles => {
@@ -46,6 +50,7 @@ function App() {
           }
           groupedTiles[tile.animal].push(tile)
         })
+
         for (const animal in groupedTiles) {
           if (groupedTiles[animal].length === 3) {
             console.log(`Three ${animal}s have been selected!`)
@@ -57,15 +62,19 @@ function App() {
             })
           }
         }
+
         return updatedTiles
     })
   }
   
 
-  const renderedTiles = animalTiles.map(tile => (
+  const renderedTiles = animalTiles
+  .sort((a, b) => b.isMatched - a.isMatched)
+  .map(tile => (
     <AnimalTile 
       key={tile.id} 
       value={tile.animal}
+      category={tile.category}
       isHeld={tile.isHeld}
       isMatched={tile.isMatched} 
       handleClick={() => handleClick(tile.id)}   
@@ -80,8 +89,9 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={getNewAnimalTiles}>New Animals</button>
-          <button className="btn" onClick={scramble}>Scramble</button>
+          <button className="btn" onClick={getNewAnimalTiles}>New Tiles</button>
+          <button className="btn" onClick={scrambleCurrentTiles}>Scramble</button>
+          <button className="btn" onClick={clearHeldTiles}>Clear</button>
         </div>
       </div>
       {/* end wrapper */}

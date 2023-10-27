@@ -31,9 +31,13 @@ import {
  }
 
  export default function AnimalTile(props) {
+  let tileClass = `animal-tile`
+  if (props.isHeld) {
+    tileClass += ` ${props.category}`
+  }
   return (
     <div 
-      className={`animal-tile ${props.isHeld ? 'held' : ''}`} 
+      className={tileClass} 
       onClick={props.handleClick}
     >
       <FontAwesomeIcon 
