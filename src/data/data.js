@@ -11,6 +11,7 @@ export const initialTiles = animalNameArray.flatMap(animal => {
   return Array(3).fill().map(() => ({
     id: idCounter++,
     animal: animal,
-    isHeld: false
+    isHeld: false,
+    isMatched: false
   }))
 })

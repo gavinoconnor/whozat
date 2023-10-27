@@ -22,12 +22,6 @@ function App() {
       initialTiles.filter(tile => tile.animal === animal))
   }
 
-  function handleClick(tileId) {
-    setAnimalTiles(prevTiles => prevTiles.map(tile => 
-      tile.id === tileId ? {...tile, isHeld: !tile.isHeld} : tile
-    ))
-  }
-  
   function getNewAnimalTiles() {
     const newAnimals = getFourRandomAnimals(animalNameArray)
     setAnimalTiles(shuffle(getTilesForSelectedAnimals(newAnimals)))
@@ -36,12 +30,44 @@ function App() {
   function scramble() {
     setAnimalTiles(prevTiles => shuffle([...prevTiles]))
   }
+  
+  function handleClick(tileId) {
+    setAnimalTiles(prevTiles => {
+      let updatedTiles = prevTiles.map(tile => 
+        tile.id === tileId ? {...tile, isHeld: !tile.isHeld} : tile
+        )
+        // Check for three matching tiles
+        const heldTiles = updatedTiles.filter(tile => tile.isHeld)
+        const groupedTiles = {}
+
+        heldTiles.forEach(tile => {
+          if (!groupedTiles[tile.animal]) {
+            groupedTiles[tile.animal] = []
+          }
+          groupedTiles[tile.animal].push(tile)
+        })
+        for (const animal in groupedTiles) {
+          if (groupedTiles[animal].length === 3) {
+            console.log(`Three ${animal}s have been selected!`)
+            updatedTiles = updatedTiles.map(tile => {
+              if (groupedTiles[animal].some(matchedTile => matchedTile.id === tile.id)) {
+                return { ...tile, isMatched: true }
+              }
+              return tile
+            })
+          }
+        }
+        return updatedTiles
+    })
+  }
+  
 
   const renderedTiles = animalTiles.map(tile => (
     <AnimalTile 
       key={tile.id} 
       value={tile.animal}
-      isHeld={tile.isHeld} 
+      isHeld={tile.isHeld}
+      isMatched={tile.isMatched} 
       handleClick={() => handleClick(tile.id)}   
     />
   ))
