@@ -48,6 +48,8 @@ h2 {
   background-color: hsl(210, 100%, 55%);
   color: white;
   cursor: pointer;
+  text-align: center;
+  line-height: 60px;
 }
 
 .btn:active {
