@@ -1,27 +1,25 @@
 import { useState } from 'react'
 import { shuffle } from './utils'
-import { baseAnimals, initialTiles } from './data/data'
+import { animalNameArray, initialTiles } from './data/data'
 import AnimalTile from './AnimalTile'
 import './App.css'
-
 
 
 function App() {
 
   const [animalTiles, setAnimalTiles] = useState(() => {
-    const selectedAnimals = selectAnimals(baseAnimals)
-    return shuffle(getSelectedAnimalTiles(selectedAnimals))
+    const selectedAnimals = getFourRandomAnimals(animalNameArray)
+    const selectedTiles = getTilesForSelectedAnimals(selectedAnimals)
+    return shuffle(selectedTiles)
   })
 
-  function selectAnimals(animalArray) {
-    const shuffledAnimals = shuffle(animalArray)
-    // select and shuffle four animals
-    return shuffledAnimals.slice(0, 4)
+  function getFourRandomAnimals(animalNames) {
+    return shuffle(animalNames).slice(0, 4)
   }
 
-  function getSelectedAnimalTiles(selectedAnimals) {
-    return initialTiles.filter(tile => 
-      selectedAnimals.includes(tile.animal))
+  function getTilesForSelectedAnimals(selectedAnimals) {
+    return selectedAnimals.flatMap(animal => 
+      initialTiles.filter(tile => tile.animal === animal))
   }
 
   function handleClick(tileId) {
@@ -30,9 +28,9 @@ function App() {
     ))
   }
   
-  function getNewAnimals() {
-    const selected = selectAnimals(baseAnimals)
-    setAnimalTiles(shuffle(getSelectedAnimalTiles(selected)))
+  function getNewAnimalTiles() {
+    const newAnimals = getFourRandomAnimals(animalNameArray)
+    setAnimalTiles(shuffle(getTilesForSelectedAnimals(newAnimals)))
   }
 
   function scramble() {
@@ -56,7 +54,7 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={getNewAnimals}>New Animals</button>
+          <button className="btn" onClick={getNewAnimalTiles}>New Animals</button>
           <button className="btn" onClick={scramble}>Scramble</button>
         </div>
       </div>
