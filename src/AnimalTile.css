@@ -14,9 +14,8 @@
   background-color: hsl(115, 100%, 75%);
 }
 
-.mammal { background-color: #FFD700; } /* gold */
-.fish { background-color: #1E90FF; }   /* blue */
-.bird { background-color: #FF6347; }   /* red */
-.insect { background-color: #32CD32; } /* green */
-.amphibian-reptile { background-color: #EE82EE; } /* violet */
-.other {background-color: red }
+.ground { background-color: hsl(115, 50%, 45%); } /* green */
+.water { background-color: hsl(174, 72%, 56%); }   /* blue */
+.flying { background-color: hsl(55, 100%, 50%); }   /* gold */
+.other {background-color: hsl(325, 100%, 35%); }
+
