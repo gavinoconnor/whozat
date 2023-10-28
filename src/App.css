@@ -38,6 +38,14 @@ h2 {
   justify-items: center;
 }
 
+.button-container {
+  width: 360px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .btn {
   height: 60px;
   width: 100px;
@@ -57,12 +65,5 @@ h2 {
 }
 
 
-.button-container {
-  width: 340px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
 
 
