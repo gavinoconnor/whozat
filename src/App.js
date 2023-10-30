@@ -90,18 +90,17 @@ function App() {
   
   return (
     <div className="app">
-      <h2>WHOZAT!?</h2>
+      <h2 className="title">WHOZAT!?</h2>
       <div className="wrapper">
         <div className="tile-container">
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={getNewAnimalTiles}>Reset</button>
-          <button className="btn" onClick={scrambleCurrentTiles}>Scramble</button>
-          <button className="btn" onClick={clearHeldTiles}>Clear</button>
+          <button className="btn" onClick={getNewAnimalTiles}>RESET</button>
+          <button className="btn" onClick={scrambleCurrentTiles}>MIX-UP</button>
+          <button className="btn" onClick={clearHeldTiles}>CLEAR</button>
         </div>
       </div>
-      {/* end wrapper */}
     </div>
   );
 }

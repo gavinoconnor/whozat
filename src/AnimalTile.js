@@ -45,6 +45,7 @@ import {
       className={tileClass} 
       onClick={props.handleClick}
     >
+      {/* <h2>{props.value}</h2> */}
       <FontAwesomeIcon 
         icon={animalIcons[props.value]} 
         size="3x" 

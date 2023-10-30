@@ -11,10 +11,13 @@
   justify-content: flex-start;
 }
 
-h2 {
+h2.title {
   text-align: center;
-  padding: .75em;
-  margin: 0 auto;
+  margin: .5em auto;
+  font-family: Lobster, sans-serif;
+  font-size: 3rem;
+  color: hsla(0, 100%, 55%, 0.9);
+  text-shadow: 0 0 1px #252525;
 }
 
 .wrapper {
@@ -24,7 +27,7 @@ h2 {
   max-width: 600px;
   margin: 0 auto;
   border-radius: 4px;
-  padding: 1em;
+  padding: 0 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,14 +53,17 @@ h2 {
   height: 60px;
   width: 110px;
   border: none;
+  font-family: Poppins, sans-serif;
   font-size: 1rem;
   font-weight: 700;
   border-radius: 4px;
   background-color: hsla(155, 100%, 30%, 0.5);
-  color: black;
-  cursor: pointer;
+  background-color: hsla(0, 100%, 55%, 0.9);
+  color: hsla(70, 50%, 70%, 1);
+  text-shadow: 0 0 1px #FFFDFA;
   text-align: center;
   line-height: 60px;
+  cursor: pointer;
 }
 
 .btn:active {
