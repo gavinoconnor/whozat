@@ -34,7 +34,7 @@ h2 {
 .tile-container {
   display: grid;
   grid-template: auto auto / repeat(3, 1fr);
-  gap: 20px;
+  gap: 12px;
   justify-items: center;
 }
 
