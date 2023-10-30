@@ -15,10 +15,14 @@
   pointer-events: none;
 }
 
-h2.animal-name {
-
+.animal-name {
+  font-family: Poppins, sans-serif;
+  font-size: 1.25rem;
+  position: absolute;
+  top: 55%;
+  color: #252525;
+  z-index: 1;
 }
-
 
 /* Tile Background Colors */
 .blue { background-color: hsla(174, 72%, 56%, 0.5); }   

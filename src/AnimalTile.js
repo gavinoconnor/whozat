@@ -30,6 +30,10 @@ import {
     turtle: faTurtle, unicorn: faUnicorn, whale: faWhale, worm: faWorm
  }
 
+ function capitalizeName(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+ }
+
  export default function AnimalTile(props) {
   let tileClass = `animal-tile`
 
@@ -45,12 +49,12 @@ import {
       className={tileClass} 
       onClick={props.handleClick}
     >
-      {/* <h2 className="animal-name">{props.value}</h2> */}
+      {props.isHeld && !props.isMatched && <h2 className="animal-name">{capitalizeName(props.value)}</h2>}
       <FontAwesomeIcon 
         icon={animalIcons[props.value]} 
-        size="3x" 
-        beat={props.isHeld ? true : false}
-        spin={props.isMatched ? true : false}
+        size="3x"
+        bounce={props.isHeld ? true : false}
+        flip={props.isMatched ? true : false}
       />
     </div>
   )
