@@ -8,14 +8,21 @@
   justify-content: center;
   align-items: center;
   background-color: hsla(73, 49%, 70%, 0.5);
+  position: relative;
 }
 
 .animal-tile.matched {
   pointer-events: none;
 }
 
-.green { background-color: hsla(115, 50%, 45%, 0.5); } 
+h2.animal-name {
+
+}
+
+
+/* Tile Background Colors */
 .blue { background-color: hsla(174, 72%, 56%, 0.5); }   
-.yellow { background-color: hsla(55, 100%, 50%, 0.5); }   
+.green { background-color: hsla(115, 50%, 45%, 0.5); } 
 .pink {background-color: hsla(325, 100%, 50%, 0.5); }
+.yellow { background-color: hsla(55, 100%, 50%, 0.5); }   
 

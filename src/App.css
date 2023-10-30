@@ -13,7 +13,7 @@
 
 h2.title {
   text-align: center;
-  margin: .5em auto;
+  margin: .5em 0 0;
   font-family: Lobster, sans-serif;
   font-size: 3rem;
   color: hsla(0, 100%, 55%, 0.9);
@@ -31,7 +31,7 @@ h2.title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .tile-container {
