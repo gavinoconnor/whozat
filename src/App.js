@@ -89,7 +89,7 @@ function App() {
   ))
   
   return (
-    <div className="App">
+    <div className="app">
       <h2>WHOZAT!?</h2>
       <div className="wrapper">
         <div className="tile-container">

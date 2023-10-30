@@ -54,7 +54,6 @@ export const generateTiles = (selectedAnimals) => {
  
   return selectedAnimals.flatMap((animalData, index) => {
     const tileColor = shuffledColors[index % shuffledColors.length]
-    console.log("Assigned Color for", animalData.animal, ":", tileColor)
     return Array(3).fill().map(() => ({
       id: idCounter++,
       animal: animalData.animal,
