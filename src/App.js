@@ -82,7 +82,8 @@ function App() {
       value={tile.animal}
       category={tile.category}
       isHeld={tile.isHeld}
-      isMatched={tile.isMatched} 
+      isMatched={tile.isMatched}
+      colorClass={tile.colorClass} 
       handleClick={() => handleClick(tile.id)}   
     />
   ))
@@ -95,7 +96,7 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={getNewAnimalTiles}>New Tiles</button>
+          <button className="btn" onClick={getNewAnimalTiles}>Reset</button>
           <button className="btn" onClick={scrambleCurrentTiles}>Scramble</button>
           <button className="btn" onClick={clearHeldTiles}>Clear</button>
         </div>

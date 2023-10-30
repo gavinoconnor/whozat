@@ -32,9 +32,11 @@ import {
 
  export default function AnimalTile(props) {
   let tileClass = `animal-tile`
+
   if (props.isHeld) {
-    tileClass += ` ${props.category}`
+    tileClass += ` ${props.colorClass}`
   }
+  
   if (props.isMatched) {
     tileClass += ` matched`
   }

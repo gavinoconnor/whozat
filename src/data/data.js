@@ -1,3 +1,5 @@
+import { shuffle } from '../utils'
+
 export const animalsData = [
   {animal: "alicorn", category: "other"}, 
   {animal: "bat", category: "flying"}, 
@@ -45,14 +47,21 @@ export const animalsData = [
 
 let idCounter = 1
 
+const colorClasses = ["green", "blue", "pink", "yellow"]
+
 export const generateTiles = (selectedAnimals) => {
-  return selectedAnimals.flatMap(animalData => {
+  const shuffledColors = shuffle(colorClasses)
+ 
+  return selectedAnimals.flatMap((animalData, index) => {
+    const tileColor = shuffledColors[index % shuffledColors.length]
+    console.log("Assigned Color for", animalData.animal, ":", tileColor)
     return Array(3).fill().map(() => ({
       id: idCounter++,
       animal: animalData.animal,
       category: animalData.category,
       isHeld: false,
-      isMatched: false
+      isMatched: false,
+      colorClass: tileColor
     }))
   })
 }

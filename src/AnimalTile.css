@@ -2,20 +2,20 @@
   cursor: pointer;
   height: 100px;
   width: 100px;
-  box-shadow: 2px 2px 4px hsla(73, 49%, 70%, 0.5);
+  box-shadow: 2px 2px 4px hsla(73, 49%, 70%, 0.75);
   border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsla(0, 0%, 96%, 0.5);
+  background-color: hsla(73, 49%, 70%, 0.5);
 }
 
 .animal-tile.matched {
   pointer-events: none;
 }
 
-.ground { background-color: hsl(115, 50%, 45%); } /* green */
-.water { background-color: hsl(174, 72%, 56%); }   /* blue */
-.flying { background-color: hsl(55, 100%, 50%); }   /* gold */
-.other {background-color: hsl(325, 100%, 35%); }
+.green { background-color: hsla(115, 50%, 45%, 0.5); } 
+.blue { background-color: hsla(174, 72%, 56%, 0.5); }   
+.yellow { background-color: hsla(55, 100%, 50%, 0.5); }   
+.pink {background-color: hsla(325, 100%, 50%, 0.5); }
 
