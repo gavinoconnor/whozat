@@ -13,7 +13,8 @@
 
 h2.title {
   text-align: center;
-  margin: .5em 0 0;
+  margin-top: .25em;
+  margin-bottom: 0;
   font-family: Poppins, sans-serif;
   font-size: calc(3rem + 1vw);
   font-weight: 700;
@@ -34,7 +35,7 @@ h2.title {
 }
 
 .tile-container {
-  margin: 20px 0;
+  margin-bottom: .5em;
   display: grid;
   grid-template: auto auto / repeat(3, 1fr);
   gap: 12px;
@@ -58,6 +59,7 @@ h2.title {
   font-weight: 700;
   border-radius: 4px;
   background-color: hsla(210, 100%, 75%, .5);
+  color: hsl(330, 3%, 13%);
   text-shadow: 0 0 1px #FFFDFA;
   text-align: center;
   line-height: 60px;
