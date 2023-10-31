@@ -90,7 +90,7 @@ function App() {
   
   return (
     <div className="app">
-      <h2 className="title">WHOZAT!?</h2>
+      <h2 className="title">WHOZAT<span>!?</span></h2>
       <div className="wrapper">
         <div className="tile-container">
           {renderedTiles}

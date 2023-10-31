@@ -2,12 +2,12 @@
   cursor: pointer;
   height: 108px;
   width: 108px;
-  box-shadow: 2px 2px 4px hsla(73, 49%, 70%, 0.75);
+  box-shadow: 0 0 4px hsla(210, 100%, 75%, .3);
   border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsla(73, 49%, 70%, 0.5);
+  border: 1px solid hsla(210, 100%, 75%, .3);
   position: relative;
 }
 
