@@ -13,6 +13,8 @@ function App() {
     return shuffle(selectedTiles)
   })
 
+  const [hasWon, setHasWon] = useState(false)
+
   function getFourRandomAnimals(animalData) {
     return shuffle(animalData).slice(0, 4)
   }
@@ -24,6 +26,7 @@ function App() {
   function getNewAnimalTiles() {
     const newAnimals = getFourRandomAnimals(animalsData)
     setAnimalTiles(shuffle(getTilesForSelectedAnimals(newAnimals)))
+    setHasWon(false)
   }
 
   function scrambleCurrentTiles() {
@@ -41,6 +44,13 @@ function App() {
     )
   }
 
+  function checkWinCondition(tiles) {
+    return tiles.every(tile => tile.isMatched)
+  }
+
+  function triggerWinAnimation() {
+    setHasWon(true)
+  }
   
   function handleClick(tileId) {
     setAnimalTiles(prevTiles => {
@@ -59,14 +69,21 @@ function App() {
         })
 
         for (const animal in groupedTiles) {
+          // If there are three held tiles that match...
           if (groupedTiles[animal].length === 3) {
             updatedTiles = updatedTiles.map(tile => {
+              // and the clicked tile is one of those three...
               if (groupedTiles[animal].some(matchedTile => matchedTile.id === tile.id)) {
+                // set isMatched to true
                 return { ...tile, isMatched: true }
               }
               return tile
             })
           }
+        }
+
+        if (checkWinCondition(updatedTiles)) {
+          triggerWinAnimation()
         }
 
         return updatedTiles
@@ -92,13 +109,13 @@ function App() {
     <div className="app">
       <h2 className="title">WHOZAT<span>!?</span></h2>
       <div className="wrapper">
-        <div className="tile-container">
+        <div className={`tile-container ${hasWon ? 'win-animation' : ''}`}>
           {renderedTiles}
         </div>
         <div className="button-container">
           <button className="btn" onClick={getNewAnimalTiles}>RESET</button>
-          <button className="btn" onClick={scrambleCurrentTiles}>MIX-UP</button>
-          <button className="btn" onClick={clearHeldTiles}>CLEAR</button>
+          <button className="btn" onClick={scrambleCurrentTiles} disabled={hasWon}>MIX-UP</button>
+          <button className="btn" onClick={clearHeldTiles} disabled={hasWon}>CLEAR</button>
         </div>
       </div>
     </div>
