@@ -107,7 +107,7 @@ function App() {
   
   return (
     <div className="app">
-      <h2 className="title">WHOZAT<span>!?</span></h2>
+      <h1 className="title">WHOZAT<span>!?</span></h1>
       <div className="wrapper">
         <div className={`tile-container ${hasWon ? 'win-animation' : ''}`}>
           {renderedTiles}

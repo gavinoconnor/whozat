@@ -11,10 +11,9 @@
   justify-content: flex-start;
 }
 
-h2.title {
+h1.title {
   text-align: center;
-  margin-top: .25em;
-  margin-bottom: 0;
+  margin: 0.5em auto;
   font-family: Poppins, sans-serif;
   font-size: calc(3rem + 1vw);
   font-weight: 700;
@@ -22,7 +21,7 @@ h2.title {
 }
 
 .wrapper {
-  height: 600px;
+  min-height: 600px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -35,7 +34,7 @@ h2.title {
 }
 
 .tile-container {
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   display: grid;
   grid-template: auto auto / repeat(3, 1fr);
   gap: 12px;
@@ -43,6 +42,7 @@ h2.title {
 }
 
 .button-container {
+  margin-top: 2em;
   width: 360px;
   display: flex;
   flex-direction: row;
