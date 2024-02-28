@@ -97,7 +97,6 @@ function App() {
     <AnimalTile 
       key={tile.id} 
       value={tile.animal}
-      category={tile.category}
       isHeld={tile.isHeld}
       isMatched={tile.isMatched}
       colorClass={tile.colorClass} 
@@ -113,9 +112,22 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button className="btn" onClick={getNewAnimalTiles}>RESET</button>
-          <button className="btn" onClick={scrambleCurrentTiles} disabled={hasWon}>MIX-UP</button>
-          <button className="btn" onClick={clearHeldTiles} disabled={hasWon}>CLEAR</button>
+          <button 
+            className="btn" 
+            onClick={getNewAnimalTiles} 
+            aria-label="Reset tiles">RESET
+          </button>
+          <button 
+            className="btn" 
+            onClick={scrambleCurrentTiles} 
+            disabled={hasWon} aria-label="Mix-up tiles">MIX-UP
+          </button>
+          <button 
+          className="btn" 
+          onClick={clearHeldTiles} 
+          disabled={hasWon}
+          aria-label="Clear held tiles">CLEAR
+          </button>
         </div>
       </div>
     </div>
