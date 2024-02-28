@@ -31,30 +31,23 @@ import {
  }
 
  function capitalizeName(string) {
+  if (!string || typeof string !== 'string') {
+    return '';
+  }
   return string.charAt(0).toUpperCase() + string.slice(1)
  }
 
- export default function AnimalTile(props) {
-  let tileClass = `animal-tile`
+ export default function AnimalTile({ isHeld, isMatched, colorClass, handleClick, value }) {
+  const tileClass = `animal-tile ${isHeld ? colorClass : ''} ${isMatched ? 'matched' : ''}`
 
-  if (props.isHeld) {
-    tileClass += ` ${props.colorClass}`
-  }
-  
-  if (props.isMatched) {
-    tileClass += ` matched`
-  }
   return (
-    <div 
-      className={tileClass} 
-      onClick={props.handleClick}
-    >
-      {props.isHeld && !props.isMatched && <h2 className="animal-name">{capitalizeName(props.value)}</h2>}
+    <div className={tileClass} onClick={handleClick}>
+      {isHeld && !isMatched && <h2 className="animal-name">{capitalizeName(value)}</h2>}
       <FontAwesomeIcon 
-        icon={animalIcons[props.value]} 
+        icon={animalIcons[value]} 
         size="3x"
-        bounce={props.isHeld ? true : false}
-        flip={props.isMatched ? true : false}
+        bounce={!!isHeld}
+        flip={!!isMatched}
       />
     </div>
   )
