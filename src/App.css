@@ -13,7 +13,7 @@
 
 h1.title {
   text-align: center;
-  margin: 0.5em auto;
+  margin: 0.25em auto;
   font-family: Poppins, sans-serif;
   font-size: calc(3rem + 1vw);
   font-weight: 700;
@@ -30,7 +30,7 @@ h1.title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .tile-container {
@@ -42,7 +42,7 @@ h1.title {
 }
 
 .button-container {
-  margin-top: 2em;
+  margin-top: 1em;
   width: 360px;
   display: flex;
   flex-direction: row;

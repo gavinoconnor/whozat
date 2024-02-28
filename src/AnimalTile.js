@@ -38,16 +38,35 @@ import {
  }
 
  export default function AnimalTile({ isHeld, isMatched, colorClass, handleClick, value }) {
-  const tileClass = `animal-tile ${isHeld ? colorClass : ''} ${isMatched ? 'matched' : ''}`
+  
+  const tileClass = `
+    animal-tile 
+    ${isHeld ? colorClass : ''} 
+    ${isMatched ? 'matched' : ''}
+  `
+  // Allow Enter and Spacebar keys to 'click' tiles
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick()
+    }
+  }
 
   return (
-    <div className={tileClass} onClick={handleClick}>
+    <div 
+      className={tileClass} 
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex="0"
+      aria-pressed={isHeld}
+    >
       {isHeld && !isMatched && <h2 className="animal-name">{capitalizeName(value)}</h2>}
       <FontAwesomeIcon 
         icon={animalIcons[value]} 
         size="3x"
         bounce={!!isHeld}
         flip={!!isMatched}
+        aria-hidden="true"
       />
     </div>
   )
