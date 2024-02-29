@@ -117,7 +117,7 @@ function App() {
             onClick={getNewAnimalTiles} 
             aria-label="Reset tiles">RESET
           </button>
-          <button 
+          <button
             className="btn" 
             onClick={scrambleCurrentTiles} 
             disabled={hasWon} aria-label="Mix-up tiles">MIX-UP
