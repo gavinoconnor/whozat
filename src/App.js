@@ -3,6 +3,7 @@ import { shuffle } from './utils'
 import { animalsData, generateTiles } from './data/data'
 import AnimalTile from './AnimalTile'
 import './App.css'
+import confetti from 'canvas-confetti'
 
 
 function App() {
@@ -49,6 +50,11 @@ function App() {
   }
 
   function triggerWinAnimation() {
+    confetti({
+      particleCount: 140,
+      spread: 60,
+      origin: { y: 0.8 }
+    })
     setHasWon(true)
   }
   
