@@ -2,17 +2,40 @@
   cursor: pointer;
   height: calc(108px + 1.5vw);
   width: calc(108px + 1.5vw);
-  box-shadow: 0 0 4px hsla(210, 100%, 75%, .3);
-  border-radius: 2px;
+  border-radius: 10px;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid hsla(210, 100%, 75%, .3);
   position: relative;
+  touch-action: manipulation;
+  user-select: none;
+
+  /* 3D resting state — first layer defines all edges, second gives depth */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 3px 4px 0px rgba(0, 0, 0, 0.55);
+  transform: translate(0, 0);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
 }
 
+/* Desktop hover — tile lifts */
+@media (hover: hover) {
+  .animal-tile:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 5px 6px 0px rgba(0, 0, 0, 0.6);
+    transform: translate(-1px, -1px);
+  }
+}
+
+/* Press — tile pushes down into shadow */
+.animal-tile:active {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 1px 1px 0px rgba(0, 0, 0, 0.4);
+  transform: translate(2px, 3px);
+}
+
+/* Matched tiles stay pressed */
 .animal-tile.matched {
   pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 1px 1px 0px rgba(0, 0, 0, 0.35);
+  transform: translate(2px, 3px);
 }
 
 .animal-name {
@@ -20,13 +43,12 @@
   font-size: 1.25rem;
   position: absolute;
   top: 55%;
-  color: #252525;
+  color: var(--text);
   z-index: 1;
 }
 
 /* Tile Background Colors */
-.blue { background-color: hsla(174, 72%, 56%, 0.5); }   
-.green { background-color: hsla(115, 50%, 45%, 0.5); } 
-.pink {background-color: hsla(325, 100%, 50%, 0.5); }
-.yellow { background-color: hsla(55, 100%, 50%, 0.5); }   
-
+.color-1 { background-color: var(--color-1); }
+.color-2 { background-color: var(--color-2); }
+.color-3 { background-color: var(--color-3); }
+.color-4 { background-color: var(--color-4); }

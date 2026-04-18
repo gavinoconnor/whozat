@@ -47,7 +47,7 @@ export const animalsData = [
 
 let idCounter = 1
 
-const colorClasses = ["green", "blue", "pink", "yellow"]
+const colorClasses = ["color-1", "color-2", "color-3", "color-4"]
 
 export const generateTiles = (selectedAnimals) => {
   const shuffledColors = shuffle(colorClasses)

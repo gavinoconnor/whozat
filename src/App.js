@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { shuffle } from './utils'
 import { animalsData, generateTiles } from './data/data'
+import { themes } from './themes'
 import AnimalTile from './AnimalTile'
 import './App.css'
 import confetti from 'canvas-confetti'
@@ -15,6 +16,7 @@ function App() {
   })
 
   const [hasWon, setHasWon] = useState(false)
+  const [theme, setTheme] = useState('sea')
 
   function getFourRandomAnimals(animalData) {
     return shuffle(animalData).slice(0, 4)
@@ -111,8 +113,21 @@ function App() {
   ))
   
   return (
-    <div className="app">
+    <div className={`app theme-${theme}`}>
       <h1 className="title">WHOZAT<span>!?</span></h1>
+      <div className="theme-toggle">
+        {themes.map(t => (
+          <button
+            key={t.id}
+            className={`theme-btn ${theme === t.id ? 'active' : ''}`}
+            data-theme={t.id}
+            onClick={() => setTheme(t.id)}
+            aria-label={`${t.label} theme`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
       <div className="wrapper">
         <div className={`tile-container ${hasWon ? 'win-animation' : ''}`}>
           {renderedTiles}

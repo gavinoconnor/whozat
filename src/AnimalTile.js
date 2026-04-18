@@ -1,4 +1,5 @@
 import './AnimalTile.css'
+import { triggerHaptic } from 'tactus'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faAlicorn, 
@@ -47,14 +48,15 @@ import {
   // Allow Enter and Spacebar keys to 'click' tiles
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
+      triggerHaptic()
       handleClick()
     }
   }
 
   return (
-    <div 
-      className={tileClass} 
-      onClick={handleClick}
+    <div
+      className={tileClass}
+      onClick={() => { triggerHaptic(); handleClick() }}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex="0"
