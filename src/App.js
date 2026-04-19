@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { triggerHaptic } from 'tactus'
 import { shuffle } from './utils'
 import { animalsData, generateTiles } from './data/data'
 import { themes } from './themes'
@@ -52,19 +53,6 @@ function App() {
     if (nextMode === gameMode) return
     setGameMode(nextMode)
     getNewAnimalTiles(nextMode)
-  }
-
-  function clearHeldTiles() {
-    cancelPendingFlipBack()
-    const faceDownDefault = MODES[gameMode].faceDown
-    setAnimalTiles(prevTiles =>
-      prevTiles.map(tile => {
-        if (tile.isMatched) {
-          return tile;
-        }
-        return { ...tile, isHeld: false, isFaceDown: faceDownDefault }
-      })
-    )
   }
 
   function checkWinCondition(tiles) {
@@ -191,26 +179,23 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
+          {Object.entries(MODES).map(([id, config]) => (
+            <button
+              key={id}
+              className={`btn mode-btn ${gameMode === id ? 'active' : ''}`}
+              onClick={() => { triggerHaptic(); handleModeChange(id) }}
+              aria-label={`${config.label} mode`}
+              aria-pressed={gameMode === id}
+            >
+              {config.label.toUpperCase()}
+            </button>
+          ))}
           <button
             className="btn"
-            onClick={() => getNewAnimalTiles()}
-            aria-label="Reset tiles">RESET
-          </button>
-          <select
-            className="btn mode-select"
-            value={gameMode}
-            onChange={(e) => handleModeChange(e.target.value)}
-            aria-label="Game mode"
+            onClick={() => { triggerHaptic(); getNewAnimalTiles() }}
+            aria-label="Reset tiles"
           >
-            {Object.entries(MODES).map(([id, config]) => (
-              <option key={id} value={id}>{config.label.toUpperCase()}</option>
-            ))}
-          </select>
-          <button
-          className="btn"
-          onClick={clearHeldTiles}
-          disabled={hasWon}
-          aria-label="Clear held tiles">CLEAR
+            RESET
           </button>
         </div>
       </div>
