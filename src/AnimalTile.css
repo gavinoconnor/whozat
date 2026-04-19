@@ -52,3 +52,23 @@
 .color-2 { background-color: var(--color-2); }
 .color-3 { background-color: var(--color-3); }
 .color-4 { background-color: var(--color-4); }
+
+/* Face-down (memory mode) */
+.animal-tile.face-down {
+  background-color: var(--accent);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.08) 0 8px,
+    rgba(0, 0, 0, 0.08) 8px 16px
+  );
+}
+
+.card-back {
+  font-family: Poppins, sans-serif;
+  font-size: calc(2.5rem + 1vw);
+  font-weight: 700;
+  color: var(--text);
+  opacity: 0.6;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  user-select: none;
+}

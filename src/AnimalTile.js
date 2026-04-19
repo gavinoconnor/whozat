@@ -38,11 +38,12 @@ import {
   return string.charAt(0).toUpperCase() + string.slice(1)
  }
 
- export default function AnimalTile({ isHeld, isMatched, colorClass, handleClick, value }) {
-  
+ export default function AnimalTile({ isHeld, isMatched, isFaceDown, colorClass, handleClick, value }) {
+
   const tileClass = `
-    animal-tile 
-    ${isHeld ? colorClass : ''} 
+    animal-tile
+    ${isFaceDown ? 'face-down' : ''}
+    ${isHeld && !isFaceDown ? colorClass : ''}
     ${isMatched ? 'matched' : ''}
   `
   // Allow Enter and Spacebar keys to 'click' tiles
@@ -61,15 +62,22 @@ import {
       role="button"
       tabIndex="0"
       aria-pressed={isHeld}
+      aria-label={isFaceDown ? 'Face-down card' : capitalizeName(value)}
     >
-      {isHeld && !isMatched && <h2 className="animal-name">{capitalizeName(value)}</h2>}
-      <FontAwesomeIcon 
-        icon={animalIcons[value]} 
-        size="3x"
-        bounce={!!isHeld}
-        flip={!!isMatched}
-        aria-hidden="true"
-      />
+      {isFaceDown ? (
+        <span className="card-back" aria-hidden="true">?</span>
+      ) : (
+        <>
+          {isHeld && !isMatched && <h2 className="animal-name">{capitalizeName(value)}</h2>}
+          <FontAwesomeIcon
+            icon={animalIcons[value]}
+            size="3x"
+            bounce={!!isHeld}
+            flip={!!isMatched}
+            aria-hidden="true"
+          />
+        </>
+      )}
     </div>
   )
 }

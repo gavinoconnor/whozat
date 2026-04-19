@@ -49,18 +49,24 @@ let idCounter = 1
 
 const colorClasses = ["color-1", "color-2", "color-3", "color-4"]
 
-export const generateTiles = (selectedAnimals) => {
+export const generateTiles = (
+  selectedAnimals,
+  { tilesPerAnimal = 3, faceDown = false, colorPerAnimal = true } = {}
+) => {
   const shuffledColors = shuffle(colorClasses)
- 
+
   return selectedAnimals.flatMap((animalData, index) => {
-    const tileColor = shuffledColors[index % shuffledColors.length]
-    return Array(3).fill().map(() => ({
+    const animalColor = shuffledColors[index % shuffledColors.length]
+    return Array(tilesPerAnimal).fill().map(() => ({
       id: idCounter++,
       animal: animalData.animal,
       category: animalData.category,
       isHeld: false,
       isMatched: false,
-      colorClass: tileColor
+      isFaceDown: faceDown,
+      colorClass: colorPerAnimal
+        ? animalColor
+        : colorClasses[Math.floor(Math.random() * colorClasses.length)]
     }))
   })
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { shuffle } from './utils'
 import { animalsData, generateTiles } from './data/data'
 import { themes } from './themes'
@@ -6,43 +6,63 @@ import AnimalTile from './AnimalTile'
 import './App.css'
 import confetti from 'canvas-confetti'
 
+const MODES = {
+  classic:    { tilesPerAnimal: 3, animalCount: 4, faceDown: false, matchCount: 3, colorPerAnimal: true,  label: 'Classic' },
+  'memory-2': { tilesPerAnimal: 2, animalCount: 6, faceDown: true,  matchCount: 2, colorPerAnimal: false, label: 'Memory' },
+  // 'memory-3': { tilesPerAnimal: 3, animalCount: 4, faceDown: true, matchCount: 3, colorPerAnimal: false, label: 'Memory 3' },
+}
+
+const FLIP_BACK_MS = 800
+
+function buildTiles(mode) {
+  const config = MODES[mode]
+  const selectedAnimals = shuffle(animalsData).slice(0, config.animalCount)
+  return shuffle(generateTiles(selectedAnimals, {
+    tilesPerAnimal: config.tilesPerAnimal,
+    faceDown: config.faceDown,
+    colorPerAnimal: config.colorPerAnimal,
+  }))
+}
 
 function App() {
 
-  const [animalTiles, setAnimalTiles] = useState(() => {
-    const selectedAnimals = getFourRandomAnimals(animalsData)
-    const selectedTiles = getTilesForSelectedAnimals(selectedAnimals)
-    return shuffle(selectedTiles)
-  })
-
+  const [gameMode, setGameMode] = useState('classic')
+  const [animalTiles, setAnimalTiles] = useState(() => buildTiles('classic'))
   const [hasWon, setHasWon] = useState(false)
   const [theme, setTheme] = useState('sea')
 
-  function getFourRandomAnimals(animalData) {
-    return shuffle(animalData).slice(0, 4)
+  const flipBackTimeoutRef = useRef(null)
+  const isEvaluatingRef = useRef(false)
+
+  function cancelPendingFlipBack() {
+    if (flipBackTimeoutRef.current) {
+      clearTimeout(flipBackTimeoutRef.current)
+      flipBackTimeoutRef.current = null
+    }
+    isEvaluatingRef.current = false
   }
 
-  function getTilesForSelectedAnimals(selectedAnimals) {
-    return generateTiles(selectedAnimals)
-  }
-
-  function getNewAnimalTiles() {
-    const newAnimals = getFourRandomAnimals(animalsData)
-    setAnimalTiles(shuffle(getTilesForSelectedAnimals(newAnimals)))
+  function getNewAnimalTiles(mode = gameMode) {
+    cancelPendingFlipBack()
+    setAnimalTiles(buildTiles(mode))
     setHasWon(false)
   }
 
-  function scrambleCurrentTiles() {
-    setAnimalTiles(prevTiles => shuffle([...prevTiles]))
+  function handleModeChange(nextMode) {
+    if (nextMode === gameMode) return
+    setGameMode(nextMode)
+    getNewAnimalTiles(nextMode)
   }
 
   function clearHeldTiles() {
-    setAnimalTiles(prevTiles => 
+    cancelPendingFlipBack()
+    const faceDownDefault = MODES[gameMode].faceDown
+    setAnimalTiles(prevTiles =>
       prevTiles.map(tile => {
         if (tile.isMatched) {
           return tile;
         }
-        return { ...tile, isHeld: false }
+        return { ...tile, isHeld: false, isFaceDown: faceDownDefault }
       })
     )
   }
@@ -59,59 +79,97 @@ function App() {
     })
     setHasWon(true)
   }
-  
+
   function handleClick(tileId) {
+    const mode = MODES[gameMode]
+
+    // Memory mode: ignore clicks while a mismatch is flipping back
+    if (mode.faceDown && isEvaluatingRef.current) return
+
     setAnimalTiles(prevTiles => {
-      let updatedTiles = prevTiles.map(tile => 
-        tile.id === tileId ? {...tile, isHeld: !tile.isHeld} : tile
-        )
-        // Check for three matching tiles
-        const heldTiles = updatedTiles.filter(tile => tile.isHeld)
-        const groupedTiles = {}
+      const clicked = prevTiles.find(t => t.id === tileId)
+      if (!clicked) return prevTiles
 
-        heldTiles.forEach(tile => {
-          if (!groupedTiles[tile.animal]) {
-            groupedTiles[tile.animal] = []
-          }
-          groupedTiles[tile.animal].push(tile)
-        })
+      // Memory mode: ignore clicks on matched tiles or tiles already face-up
+      if (mode.faceDown && (clicked.isMatched || !clicked.isFaceDown)) {
+        return prevTiles
+      }
 
-        for (const animal in groupedTiles) {
-          // If there are three held tiles that match...
-          if (groupedTiles[animal].length === 3) {
-            updatedTiles = updatedTiles.map(tile => {
-              // and the clicked tile is one of those three...
-              if (groupedTiles[animal].some(matchedTile => matchedTile.id === tile.id)) {
-                // set isMatched to true
-                return { ...tile, isMatched: true }
-              }
-              return tile
-            })
+      let updatedTiles = prevTiles.map(tile => {
+        if (tile.id !== tileId) return tile
+        if (mode.faceDown) {
+          return { ...tile, isFaceDown: false, isHeld: true }
+        }
+        return { ...tile, isHeld: !tile.isHeld }
+      })
+
+      // Group held, non-matched tiles by animal
+      const heldTiles = updatedTiles.filter(tile => tile.isHeld && !tile.isMatched)
+      const groupedTiles = {}
+      heldTiles.forEach(tile => {
+        if (!groupedTiles[tile.animal]) {
+          groupedTiles[tile.animal] = []
+        }
+        groupedTiles[tile.animal].push(tile)
+      })
+
+      for (const animal in groupedTiles) {
+        if (groupedTiles[animal].length === mode.matchCount) {
+          const matchedIds = new Set(groupedTiles[animal].map(t => t.id))
+          updatedTiles = updatedTiles.map(tile =>
+            matchedIds.has(tile.id) ? { ...tile, isMatched: true } : tile
+          )
+          // Classic mode: cluster this match group immediately after previously matched tiles
+          // so each set of 3 occupies a single row.
+          if (!mode.faceDown) {
+            const alreadyMatched = updatedTiles.filter(t => t.isMatched && !matchedIds.has(t.id))
+            const justMatched   = updatedTiles.filter(t => matchedIds.has(t.id))
+            const notMatched    = updatedTiles.filter(t => !t.isMatched)
+            updatedTiles = [...alreadyMatched, ...justMatched, ...notMatched]
           }
         }
+      }
 
-        if (checkWinCondition(updatedTiles)) {
-          triggerWinAnimation()
+      // Memory mode: if matchCount tiles are still held and unmatched after grouping,
+      // it's a mismatch — schedule them to flip back down.
+      if (mode.faceDown) {
+        const stillHeldUnmatched = updatedTiles.filter(t => t.isHeld && !t.isMatched)
+        if (stillHeldUnmatched.length === mode.matchCount) {
+          const flipIds = new Set(stillHeldUnmatched.map(t => t.id))
+          isEvaluatingRef.current = true
+          flipBackTimeoutRef.current = setTimeout(() => {
+            setAnimalTiles(cur => cur.map(tile =>
+              flipIds.has(tile.id) && !tile.isMatched
+                ? { ...tile, isFaceDown: true, isHeld: false }
+                : tile
+            ))
+            isEvaluatingRef.current = false
+            flipBackTimeoutRef.current = null
+          }, FLIP_BACK_MS)
         }
+      }
 
-        return updatedTiles
+      if (checkWinCondition(updatedTiles)) {
+        triggerWinAnimation()
+      }
+
+      return updatedTiles
     })
   }
-  
 
-  const renderedTiles = animalTiles
-  .sort((a, b) => b.isMatched - a.isMatched)
-  .map(tile => (
-    <AnimalTile 
-      key={tile.id} 
+
+  const renderedTiles = animalTiles.map(tile => (
+    <AnimalTile
+      key={tile.id}
       value={tile.animal}
       isHeld={tile.isHeld}
       isMatched={tile.isMatched}
-      colorClass={tile.colorClass} 
-      handleClick={() => handleClick(tile.id)}   
+      isFaceDown={tile.isFaceDown}
+      colorClass={tile.colorClass}
+      handleClick={() => handleClick(tile.id)}
     />
   ))
-  
+
   return (
     <div className={`app theme-${theme}`}>
       <h1 className="title">WHOZAT<span>!?</span></h1>
@@ -133,19 +191,24 @@ function App() {
           {renderedTiles}
         </div>
         <div className="button-container">
-          <button 
-            className="btn" 
-            onClick={getNewAnimalTiles} 
+          <button
+            className="btn"
+            onClick={() => getNewAnimalTiles()}
             aria-label="Reset tiles">RESET
           </button>
+          <select
+            className="btn mode-select"
+            value={gameMode}
+            onChange={(e) => handleModeChange(e.target.value)}
+            aria-label="Game mode"
+          >
+            {Object.entries(MODES).map(([id, config]) => (
+              <option key={id} value={id}>{config.label.toUpperCase()}</option>
+            ))}
+          </select>
           <button
-            className="btn" 
-            onClick={scrambleCurrentTiles} 
-            disabled={hasWon} aria-label="Mix-up tiles">MIX-UP
-          </button>
-          <button 
-          className="btn" 
-          onClick={clearHeldTiles} 
+          className="btn"
+          onClick={clearHeldTiles}
           disabled={hasWon}
           aria-label="Clear held tiles">CLEAR
           </button>
