@@ -2,30 +2,32 @@ import './AnimalTile.css'
 import { triggerHaptic } from 'tactus'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faAlicorn,
+  faAlicorn, faAnt,
   faBadgerHoney,
-  faBat, faBee, faBird, faBugs,
+  faBat, faBee, faBird, faBugs, faButterfly,
   faCat, faCatSpace, faCow, faCrab, faCrow,
   faDeer, faDeerRudolph, faDinosaur, faDog, faDolphin,
   faDove, faDragon, faDuck, faElephant,
-  faFish, faFrog, faHippo, faHorse, faHorseSaddle,
+  faFish, faFrog, faHippo, faHorse, faHorseSaddle, faHydra,
   faKiwiBird,
   faLobster, faLocust, faMonkey, faMosquito,
   faMouseField,
-  faNarwhal, faOtter,
+  faNarwhal, faOctopus, faOpossum, faOtter, faOwl,
   faPegasus, faPig,
   faRabbit, faRaccoon, faRam,
   faSheep, faShrimp, faSnake, faSpider, faSpiderBlackWidow, faSquid, faSquirrel,
-  faTurtle, faUnicorn, faWhale, faWorm,
+  faTRex, faTurtle, faUnicorn, faWhale, faWorm,
 } from '@fortawesome/pro-light-svg-icons'
 
 const animalIcons = {
   alicorn:              faAlicorn,
+  ant:                  faAnt,
   'badger-honey':       faBadgerHoney,
   bat:                  faBat,
   bee:                  faBee,
   bird:                 faBird,
   bugs:                 faBugs,
+  butterfly:            faButterfly,
   cat:                  faCat,
   'cat-space':          faCatSpace,
   cow:                  faCow,
@@ -45,6 +47,7 @@ const animalIcons = {
   hippo:                faHippo,
   horse:                faHorse,
   'horse-saddle':       faHorseSaddle,
+  hydra:                faHydra,
   'kiwi-bird':          faKiwiBird,
   lobster:              faLobster,
   locust:               faLocust,
@@ -52,7 +55,10 @@ const animalIcons = {
   mosquito:             faMosquito,
   'mouse-field':        faMouseField,
   narwhal:              faNarwhal,
+  octopus:              faOctopus,
+  opossum:              faOpossum,
   otter:                faOtter,
+  owl:                  faOwl,
   pegasus:              faPegasus,
   pig:                  faPig,
   rabbit:               faRabbit,
@@ -65,6 +71,7 @@ const animalIcons = {
   'spider-black-widow': faSpiderBlackWidow,
   squid:                faSquid,
   squirrel:             faSquirrel,
+  't-rex':              faTRex,
   turtle:               faTurtle,
   unicorn:              faUnicorn,
   whale:                faWhale,
@@ -79,6 +86,7 @@ const displayNames = {
   'kiwi-bird':          'Kiwi',
   'mouse-field':        'Field Mouse',
   'spider-black-widow': 'Black Widow',
+  't-rex':              'T-Rex',
 }
 
 function getDisplayName(animal) {
