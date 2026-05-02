@@ -15,9 +15,11 @@ const MODES = {
 
 const FLIP_BACK_MS = 800
 
-function buildTiles(mode) {
+function buildTiles(mode, themeId) {
   const config = MODES[mode]
-  const selectedAnimals = shuffle(animalsData).slice(0, config.animalCount)
+  const category = themes.find(t => t.id === themeId)?.category ?? null
+  const pool = category ? animalsData.filter(a => a.category === category) : animalsData
+  const selectedAnimals = shuffle(pool).slice(0, config.animalCount)
   return shuffle(generateTiles(selectedAnimals, {
     tilesPerAnimal: config.tilesPerAnimal,
     faceDown: config.faceDown,
@@ -28,7 +30,7 @@ function buildTiles(mode) {
 function App() {
 
   const [gameMode, setGameMode] = useState('classic')
-  const [animalTiles, setAnimalTiles] = useState(() => buildTiles('classic'))
+  const [animalTiles, setAnimalTiles] = useState(() => buildTiles('classic', 'sea'))
   const [hasWon, setHasWon] = useState(false)
   const [theme, setTheme] = useState('sea')
 
@@ -43,10 +45,15 @@ function App() {
     isEvaluatingRef.current = false
   }
 
-  function getNewAnimalTiles(mode = gameMode) {
+  function getNewAnimalTiles(mode = gameMode, themeId = theme) {
     cancelPendingFlipBack()
-    setAnimalTiles(buildTiles(mode))
+    setAnimalTiles(buildTiles(mode, themeId))
     setHasWon(false)
+  }
+
+  function handleThemeChange(themeId) {
+    setTheme(themeId)
+    getNewAnimalTiles(gameMode, themeId)
   }
 
   function handleModeChange(nextMode) {
@@ -167,7 +174,7 @@ function App() {
             key={t.id}
             className={`theme-btn ${theme === t.id ? 'active' : ''}`}
             data-theme={t.id}
-            onClick={() => setTheme(t.id)}
+            onClick={() => handleThemeChange(t.id)}
             aria-label={`${t.label} theme`}
           >
             {t.label}
