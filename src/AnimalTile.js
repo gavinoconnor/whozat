@@ -1,44 +1,92 @@
 import './AnimalTile.css'
 import { triggerHaptic } from 'tactus'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { 
-  faAlicorn, 
-  faBat, faBee, faBird, faBugs,
-  faCat, faCrab, faCow, faCrow, 
-  faDeer, faDinosaur, faDog, faDolphin, 
+import {
+  faAlicorn,
+  faAnt,
+  faBadgerHoney,
+  faBat, faBee, faBird, faBugs, faButterfly,
+  faCat, faCatSpace, faCow, faCrab, faCrow,
+  faDeer, faDeerRudolph, faDinosaur, faDog, faDolphin,
   faDove, faDragon, faDuck, faElephant,
-  faFish, faFrog, faHippo, faHorse, 
+  faFish, faFrog, faHippo, faHorse, faHorseSaddle, faHydra,
+  faKiwiBird,
   faLobster, faLocust, faMonkey, faMosquito,
-  faNarwhal,faOtter, faPegasus, faPig,
+  faMouseField,
+  faNarwhal, faOctopus, faOpossum, faOtter, faOwl,
+  faPegasus, faPig,
   faRabbit, faRaccoon, faRam,
-  faSheep, faShrimp, faSnake, faSpider, faSquid, faSquirrel,
-  faTurtle, faUnicorn, faWhale, faWorm 
- } from '@fortawesome/pro-light-svg-icons'
+  faSheep, faShrimp, faSnake, faSpider, faSpiderBlackWidow, faSquid, faSquirrel,
+  faTRex, faTurtle, faUnicorn, faWhale, faWorm,
+} from '@fortawesome/pro-light-svg-icons'
 
- // name to icon mapping
- const animalIcons = {
-    alicorn: faAlicorn,
-    bat: faBat, bee: faBee, bird: faBird, bugs: faBugs,
-    cat: faCat, crab: faCrab, cow: faCow, crow: faCrow, 
-    deer: faDeer, dinosaur: faDinosaur, dog: faDog, dolphin: faDolphin,
-    dove: faDove, dragon: faDragon, duck: faDuck, elephant: faElephant,
-    fish: faFish, frog: faFrog, hippo: faHippo, horse: faHorse, 
-    lobster: faLobster, locust: faLocust, monkey: faMonkey,
-    mosquito: faMosquito, narwhal: faNarwhal, otter: faOtter, 
-    pegasus: faPegasus, pig: faPig, rabbit: faRabbit, raccoon: faRaccoon,
-    ram: faRam, sheep: faSheep, shrimp: faShrimp, snake: faSnake, 
-    spider: faSpider, squid: faSquid, squirrel: faSquirrel,
-    turtle: faTurtle, unicorn: faUnicorn, whale: faWhale, worm: faWorm
- }
+const animalIcons = {
+  alicorn:            faAlicorn,
+  ant:                faAnt,
+  'badger-honey':     faBadgerHoney,
+  bat:                faBat,
+  bee:                faBee,
+  bird:               faBird,
+  bugs:               faBugs,
+  butterfly:          faButterfly,
+  cat:                faCat,
+  'cat-space':        faCatSpace,
+  cow:                faCow,
+  crab:               faCrab,
+  crow:               faCrow,
+  deer:               faDeer,
+  'deer-rudolph':     faDeerRudolph,
+  dinosaur:           faDinosaur,
+  dog:                faDog,
+  dolphin:            faDolphin,
+  dove:               faDove,
+  dragon:             faDragon,
+  duck:               faDuck,
+  elephant:           faElephant,
+  fish:               faFish,
+  frog:               faFrog,
+  hippo:              faHippo,
+  horse:              faHorse,
+  'horse-saddle':     faHorseSaddle,
+  hydra:              faHydra,
+  'kiwi-bird':        faKiwiBird,
+  lobster:            faLobster,
+  locust:             faLocust,
+  monkey:             faMonkey,
+  mosquito:           faMosquito,
+  'mouse-field':      faMouseField,
+  narwhal:            faNarwhal,
+  octopus:            faOctopus,
+  opossum:            faOpossum,
+  otter:              faOtter,
+  owl:                faOwl,
+  pegasus:            faPegasus,
+  pig:                faPig,
+  rabbit:             faRabbit,
+  raccoon:            faRaccoon,
+  ram:                faRam,
+  sheep:              faSheep,
+  shrimp:             faShrimp,
+  snake:              faSnake,
+  spider:             faSpider,
+  'spider-black-widow': faSpiderBlackWidow,
+  squid:              faSquid,
+  squirrel:           faSquirrel,
+  't-rex':            faTRex,
+  turtle:             faTurtle,
+  unicorn:            faUnicorn,
+  whale:              faWhale,
+  worm:               faWorm,
+}
 
- function capitalizeName(string) {
+function capitalizeName(string) {
   if (!string || typeof string !== 'string') {
     return '';
   }
   return string.charAt(0).toUpperCase() + string.slice(1)
- }
+}
 
- export default function AnimalTile({ isHeld, isMatched, isFaceDown, colorClass, handleClick, value }) {
+export default function AnimalTile({ isHeld, isMatched, isFaceDown, colorClass, handleClick, value }) {
 
   const tileClass = `
     animal-tile
@@ -46,7 +94,6 @@ import {
     ${isHeld && !isFaceDown ? colorClass : ''}
     ${isMatched ? 'matched' : ''}
   `
-  // Allow Enter and Spacebar keys to 'click' tiles
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       triggerHaptic()
