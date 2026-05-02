@@ -213,6 +213,41 @@ h1.title {
   }
 }
 
+@media (max-width: 480px) {
+  h1.title {
+    margin-bottom: 0;
+  }
+
+  .animal-tile {
+    height: calc(98px + 1.5vw);
+    width: calc(98px + 1.5vw);
+  }
+
+  .theme-toggle {
+    margin-top: 0.2em;
+    margin-bottom: 1.5em;
+  }
+
+  .wrapper {
+    min-height: unset;
+    justify-content: flex-start;
+  }
+
+  .tile-container {
+    gap: 16px;
+    margin-bottom: 0;
+  }
+
+  .button-container {
+    margin-top: 1.5em;
+  }
+
+  .btn {
+    height: 48px;
+    line-height: 48px;
+  }
+}
+
 @media (max-width: 380px) {
   .button-container {
     flex-direction: column;
