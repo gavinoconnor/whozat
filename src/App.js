@@ -183,7 +183,20 @@ function App() {
       </div>
       <div className="wrapper">
         <div className={`tile-container ${hasWon ? 'win-animation' : ''}`}>
-          <div className="biome-bg" aria-hidden="true" />
+          <div className="biome-bg" aria-hidden="true">
+            {theme === 'wild' && (
+              <>
+                <span className="leaf leaf-3" />
+                <span className="leaf leaf-4" />
+              </>
+            )}
+            {theme === 'sky' && (
+              <>
+                <span className="cloud cloud-3" />
+                <span className="cloud cloud-4" />
+              </>
+            )}
+          </div>
           {renderedTiles}
         </div>
         <div className="button-container">
