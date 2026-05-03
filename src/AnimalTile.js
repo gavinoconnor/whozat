@@ -124,7 +124,14 @@ export default function AnimalTile({ isHeld, isMatched, isFaceDown, colorClass, 
         <span className="card-back" aria-hidden="true">?</span>
       ) : (
         <>
-          {isHeld && !isMatched && <h2 className="animal-name">{getDisplayName(value)}</h2>}
+          {isHeld && !isMatched && (
+            <h2
+              className="animal-name"
+              {...(getDisplayName(value).length >= 10 ? { 'data-long': '' } : {})}
+            >
+              {getDisplayName(value)}
+            </h2>
+          )}
           <FontAwesomeIcon
             icon={animalIcons[value]}
             size="3x"
