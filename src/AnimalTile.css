@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
   touch-action: manipulation;
   user-select: none;
 

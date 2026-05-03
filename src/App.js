@@ -183,6 +183,7 @@ function App() {
       </div>
       <div className="wrapper">
         <div className={`tile-container ${hasWon ? 'win-animation' : ''}`}>
+          <div className="biome-bg" aria-hidden="true" />
           {renderedTiles}
         </div>
         <div className="button-container">
